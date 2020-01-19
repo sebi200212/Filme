@@ -3,17 +3,14 @@
   if (isset($movieId) && $movieId && $movieId != "") {
     function get_movie($value) {
       global $movieId;
-      if($movieId == $value->id) {
-        return TRUE;
-      }else {
-        return FALSE;
-      }
+      return ($movieId == $value->id);
     }
+
     $moviesFiltrate = array_filter($movies, "get_movie");
     if (count($moviesFiltrate) > 0) {
       $movie = reset($moviesFiltrate);
-    }else { ?>
-       Nu exista acest film. Mergi <a href="archive.php">inapoi la arhiva</a>.
+    } else { ?>
+      <h2>Nu există acest film. Mergi <a href="archive.php">înapoi la arhivă</a>.</h2>
     <?php }
   }
 
@@ -29,17 +26,17 @@
           $logo = 'images\placeholder.png';
           }
           ?>
-          <img src=<?php echo $logo; ?> height: 450px;  width: 300px; style="border-radius: 9px;"/>
+          <img src=<?php echo $logo; ?> height: 450px; width: 300px; style="border-radius: 9px;"/>
       </div>
       <div class = "container">
-          <h2> <?php echo $movie->title; ?></h2>
+          <h2><?php echo $movie->title; ?></h2>
 
           <?php
             if ($movie->year >= 2010 )
               echo  "<strong>".$movie->year."</strong>";
             else
               echo $movie->year;
-           ?>
+          ?>
 
           <div class = "plot">
             <?php
