@@ -1,4 +1,7 @@
 <?php require_once('header.php');
+	$movies_rating = json_decode(file_get_contents('movies_rating.txt'));
+
+
   $movieId = $_GET['movie_id'];
   if (isset($movieId) && $movieId && $movieId != "") {
     function get_movie($value) {
@@ -13,6 +16,14 @@
       <h2>Nu există acest film. Mergi <a href="archive.php">înapoi la arhivă</a>.</h2>
     <?php }
   }
+
+	if (isset($_POST['rating'])) {
+		$rating = $_POST['rating'];
+    file_put_contents('movies_rating.txt', json_encode(ratingSystem($movieId, $rating)));
+  }
+  echo '<pre>' . print_r($movies_rating) . '</pre>';
+
+  file_put_contents('movies_rating.txt', json_encode($movies_rating));
 
   ?>
   <ul>
