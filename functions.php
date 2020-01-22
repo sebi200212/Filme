@@ -36,4 +36,22 @@
             return 1;
   }
 
+<<<<<<< HEAD
+=======
+  function ratingSystem($id, $rating) {
+    $rating_db = json_decode(file_get_contents('movies_rating.txt'));
+    
+    if (isset($rating_db[$id - 1])) {
+      $crt_movie = $rating_db[$id - 1];
+      $crt_movie->rating = round((($crt_movie->rating * $crt_movie->nr_ratings + $rating) / ++$crt_movie->nr_ratings), 0);
+    } else {
+      $rating_db[$id - 1] = new stdClass();
+      $crt_movie = $rating_db[$id - 1];
+      $crt_movie->id = $id;
+      $crt_movie->rating = $rating;
+      $crt_movie->nr_ratings = 1;
+    }
+    return $rating_db;
+  }
+>>>>>>> be9dadd9122e819bb815f045aad8363156b78528
  ?>

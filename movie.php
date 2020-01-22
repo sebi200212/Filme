@@ -1,21 +1,29 @@
 <?php require_once('header.php');
+	$movies_rating = json_decode(file_get_contents('movies_rating.txt'));
+
+
   $movieId = $_GET['movie_id'];
   if (isset($movieId) && $movieId && $movieId != "") {
     function get_movie($value) {
       global $movieId;
-      if($movieId == $value->id) {
-        return TRUE;
-      }else {
-        return FALSE;
-      }
+      return ($movieId == $value->id);
     }
+
     $moviesFiltrate = array_filter($movies, "get_movie");
     if (count($moviesFiltrate) > 0) {
       $movie = reset($moviesFiltrate);
-    }else { ?>
-       Nu exista acest film. Mergi <a href="archive.php">inapoi la arhiva</a>.
+    } else { ?>
+      <h2>Nu există acest film. Mergi <a href="archive.php">înapoi la arhivă</a>.</h2>
     <?php }
   }
+
+	if (isset($_POST['rating'])) {
+		$rating = $_POST['rating'];
+    file_put_contents('movies_rating.txt', json_encode(ratingSystem($movieId, $rating)));
+  }
+  echo '<pre>' . print_r($movies_rating) . '</pre>';
+
+  file_put_contents('movies_rating.txt', json_encode($movies_rating));
 
   ?>
   <ul>
@@ -29,9 +37,10 @@
           $logo = 'images\placeholder.png';
           }
           ?>
-          <img src=<?php echo $logo; ?> height: 450px;  width: 300px; style="border-radius: 9px;"/>
+          <img src=<?php echo $logo; ?> height: 450px; width: 300px; style="border-radius: 9px;"/>
       </div>
       <div class = "container">
+<<<<<<< HEAD
           <h2> <?php echo $movie->title; ?></h2>
           <div class="rating">
             <div class="rating-upper" style="width: 20%">
@@ -50,11 +59,16 @@
             </div>
           </div>
             <?php
+=======
+          <h2><?php echo $movie->title; ?></h2>
+
+          <?php
+>>>>>>> be9dadd9122e819bb815f045aad8363156b78528
             if ($movie->year >= 2010 )
               echo  "<strong>".$movie->year."</strong>";
             else
               echo $movie->year;
-           ?>
+          ?>
 
           <div class = "plot">
             <?php
