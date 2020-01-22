@@ -40,7 +40,6 @@
           <img src=<?php echo $logo; ?> height: 450px; width: 300px; style="border-radius: 9px;"/>
       </div>
       <div class = "container">
-<<<<<<< HEAD
           <h2> <?php echo $movie->title; ?></h2>
           <div class="rating">
             <div class="rating-upper" style="width: 20%">
@@ -58,12 +57,10 @@
                 <span>★</span>
             </div>
           </div>
-            <?php
-=======
+            
           <h2><?php echo $movie->title; ?></h2>
 
           <?php
->>>>>>> be9dadd9122e819bb815f045aad8363156b78528
             if ($movie->year >= 2010 )
               echo  "<strong>".$movie->year."</strong>";
             else
