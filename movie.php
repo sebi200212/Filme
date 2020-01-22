@@ -33,8 +33,23 @@
       </div>
       <div class = "container">
           <h2> <?php echo $movie->title; ?></h2>
-
-          <?php
+          <div class="rating">
+            <div class="rating-upper" style="width: 20%">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+            </div>
+            <div class="rating-lower">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+            </div>
+          </div>
+            <?php
             if ($movie->year >= 2010 )
               echo  "<strong>".$movie->year."</strong>";
             else
@@ -93,6 +108,31 @@
                     </div>
                   </div>
               </div>
+          </div>
+          <div class="stars">
+
+            <form action="movie.php?movie_id=<?php echo $movie->id;?>" method="POST">
+
+              <input class="star star-5" id="star-5" type="radio" name="star" value="5"/>
+              <label class="star star-5" title="Awesome - 5 stars" for="star-5"></label>
+              <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+              <label class="star star-4" title="Pretty good - 4 stars" for="star-4"></label>
+              <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+              <label class="star star-3" title="Meh - 3 stars" for="star-3"></label>
+              <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+              <label class="star star-2" title="Kinda bad - 2 stars" for="star-2"></label>
+              <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+              <label class="star star-1" title="Sucks big time - 1 star" for="star-1"></label>
+              <button style="vertical-align:middle" class="buttonSubmit" type="submit" formmethod="POST"><span>Submit </span></button>
+            </form>
+            <?php
+            /*
+              $star = $_POST['star'];
+              $array = array($movie->id, $star);
+              $encoded = json_encode($array);
+              file_put_contents('movies_rating.txt', $encoded);
+              */
+            ?>
           </div>
 
         </div>
