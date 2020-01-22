@@ -17,13 +17,11 @@
     <?php }
   }
 
-	if (isset($_POST['rating'])) {
-		$rating = $_POST['rating'];
+	if (isset($_POST['star'])) {
+		$rating = $_POST['star'];
     file_put_contents('movies_rating.txt', json_encode(ratingSystem($movieId, $rating)));
   }
   echo '<pre>' . print_r($movies_rating) . '</pre>';
-
-  file_put_contents('movies_rating.txt', json_encode($movies_rating));
 
   ?>
   <ul>
@@ -35,9 +33,8 @@
           $logo = $movie->posterUrl;
           } else {
           $logo = 'images\placeholder.png';
-          }
-          ?>
-          <img src=<?php echo $logo; ?> height: 450px; width: 300px; style="border-radius: 9px;"/>
+          } ?>
+         <img src=<?php echo $logo; ?> height: 450px; width: 300px; style="border-radius: 9px;"/>
       </div>
       <div class = "container">
           <h2> <?php echo $movie->title; ?></h2>
@@ -57,7 +54,11 @@
                 <span>★</span>
             </div>
           </div>
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> af754c2fe1b3e4e99057e9342b46db7a02b4aca5
           <h2><?php echo $movie->title; ?></h2>
 
           <?php
@@ -137,7 +138,7 @@
               <button style="vertical-align:middle" class="buttonSubmit" type="submit" formmethod="POST"><span>Submit </span></button>
             </form>
             <?php
-            /*
+            /*ne 62
               $star = $_POST['star'];
               $array = array($movie->id, $star);
               $encoded = json_encode($array);

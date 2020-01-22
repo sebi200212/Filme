@@ -435,6 +435,7 @@ template {
   .image {
     float: none;
   }
+}
 @media only screen and (min-width: 1235px) {
     .rating-upper {
       margin-left: 330px;
@@ -763,7 +764,7 @@ input.star:checked ~ .rev-box {
 }
 /*submit button*/
 .buttonSubmit {
-  display: inline-block;
+  display: inline;
   border-radius: 9px;
   background-color: #e50914;
   border: none;
