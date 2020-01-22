@@ -17,13 +17,11 @@
     <?php }
   }
 
-	if (isset($_POST['rating'])) {
-		$rating = $_POST['rating'];
+	if (isset($_POST['star'])) {
+		$rating = $_POST['star'];
     file_put_contents('movies_rating.txt', json_encode(ratingSystem($movieId, $rating)));
   }
   echo '<pre>' . print_r($movies_rating) . '</pre>';
-
-  file_put_contents('movies_rating.txt', json_encode($movies_rating));
 
   ?>
   <ul>
@@ -35,12 +33,10 @@
           $logo = $movie->posterUrl;
           } else {
           $logo = 'images\placeholder.png';
-          }
-          ?>
-          <img src=<?php echo $logo; ?> height: 450px; width: 300px; style="border-radius: 9px;"/>
+          } ?>
+         <img src=<?php echo $logo; ?> height: 450px; width: 300px; style="border-radius: 9px;"/>
       </div>
       <div class = "container">
-<<<<<<< HEAD
           <h2> <?php echo $movie->title; ?></h2>
           <div class="rating">
             <div class="rating-upper" style="width: 20%">
@@ -58,12 +54,10 @@
                 <span>★</span>
             </div>
           </div>
-            <?php
-=======
+
           <h2><?php echo $movie->title; ?></h2>
 
           <?php
->>>>>>> be9dadd9122e819bb815f045aad8363156b78528
             if ($movie->year >= 2010 )
               echo  "<strong>".$movie->year."</strong>";
             else
@@ -140,7 +134,7 @@
               <button style="vertical-align:middle" class="buttonSubmit" type="submit" formmethod="POST"><span>Submit </span></button>
             </form>
             <?php
-            /*
+            /*ne 62
               $star = $_POST['star'];
               $array = array($movie->id, $star);
               $encoded = json_encode($array);

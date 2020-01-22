@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[3,"3"]
-=======
-[{"id":1,"rating":5,"nr_ratings":2},{"id":2,"rating":70,"nr_ratings":5}]
->>>>>>> be9dadd9122e819bb815f045aad8363156b78528
+{"146":{"id":"146","rating":"5","nr_ratings":1}}
