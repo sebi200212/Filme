@@ -43,7 +43,6 @@
             return 1;
   }
 
-<<<<<<< HEAD
   function ratingSystem($id, $rating) {
     $rating_db = json_decode(file_get_contents('movies_rating.txt'));
 
@@ -63,15 +62,13 @@
       $crt_movie->rating = $rating;
       $crt_movie->nr_ratings = 1;
     }
-=======
   // set new rating of a movie
   function ratingSystem($id, $rating) {
     $rating_db = json_decode(file_get_contents('movies_rating.txt'));
 
     $crt_movie = $rating_db[$id - 1];
 		$crt_movie->rating = round((($crt_movie->rating * $crt_movie->nr_ratings + $rating) / ++$crt_movie->nr_ratings), 2);
-		
->>>>>>> 9cdc336d652f7bd4b07bdeeb574b1b14e04c724e
+
     return $rating_db;
   }
 
@@ -81,9 +78,9 @@
     for ($id = 0; $id < sizeof($movies); $id++) {
       $rating_db[$id] = new movie_rating;
 		}
-		return $rating_db;		
+		return $rating_db;
 	}
-	
+
 	// get the rating of a movie and return it
 	function get_rating ($id) {
 		$rating_db = json_decode(file_get_contents('movies_rating.txt'));
