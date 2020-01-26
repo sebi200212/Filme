@@ -1,6 +1,5 @@
 <?php require_once('header.php');?>
 <div class="index_content">
-
   <p class="index_letters">
     We provide you a basis of <?php echo count($movies); ?> films divided into <?php echo count($genres); ?> genres.
   </p>

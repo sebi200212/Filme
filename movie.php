@@ -28,11 +28,12 @@
       file_put_contents('movies_rating.txt', json_encode(ratingSystem($movieId, $rating)));
     }
   } ?>
+
   <ul>
-    <div class = "movie">
+    <div class="movie">
 
       <!----- poster ----->
-      <div class="image">
+      <div class="image_individual">
           <?php
           $external_link = $movie->posterUrl;
           if (@GetImageSize($external_link)) {
@@ -44,7 +45,7 @@
       </div>
 
       <!----- movie details ----->
-      <div class = "container">
+      <div class = "container_individual">
           <h2> <?php echo $movie->title; ?></h2>
 
           <!--- rating --->
@@ -52,9 +53,9 @@
             $crt_rating = get_rating($movieId);
             if ($crt_rating == 0) {
           ?>
-            <p>Fii primul care acordă o notă acestui film.</p>
+            <p>Be the first to rate this movie.</p>
           <?php } ?>
-          
+
           <div class="rating">
             <div class="rating-upper" style="width: <?php echo get_rating($movieId) * 20; ?>%">
                 <span>★</span>
@@ -71,7 +72,7 @@
                 <span>★</span>
             </div>
           </div>
-           
+
           <!-- other details -->
           <?php
             if ($movie->year >= 2010 )
