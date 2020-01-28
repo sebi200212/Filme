@@ -444,7 +444,7 @@ template {
 }
 @media only screen and (max-width: 340px) {
   ul {
-    padding-left: 10px;
+    padding-left: 20px;
   }
 }
 body {

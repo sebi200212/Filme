@@ -27,7 +27,8 @@
       file_put_contents('movies_rating.txt', json_encode(create_db($movies)));
       file_put_contents('movies_rating.txt', json_encode(ratingSystem($movieId, $rating)));
     }
-  } ?>
+  }
+  unset($_POST); ?>
 
   <ul>
     <div class="movie">

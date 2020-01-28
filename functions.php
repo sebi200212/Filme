@@ -1,9 +1,5 @@
 <?php
   // movie entry in ratings db
-  class movie_rating {
-    public $rating = 0;
-    public $nr_ratings = 0;
-  }
 
   function runtime_calculator($run) {
     $h = intval($run/60);
@@ -45,25 +41,47 @@
   // set new rating of a movie
   function ratingSystem($id, $rating) {
     $rating_db = json_decode(file_get_contents('movies_rating.txt'));
-
-    $crt_movie = $rating_db[$id - 1];
-		$crt_movie->rating = round((($crt_movie->rating * $crt_movie->nr_ratings + $rating) / ++$crt_movie->nr_ratings), 2);
-
+    $rating_db[$id - 1][$rating - 1]++;
     return $rating_db;
   }
 
 	// create a movie database with no ratings
   function create_db ($movies) {
+    // open file for writing (or create it)
+    $file = fopen('movies_rating.txt', 'w');
+    // make a new array containing all movies
     $rating_db = array();
+    // add a field for each movie
     for ($id = 0; $id < sizeof($movies); $id++) {
-      $rating_db[$id] = new movie_rating;
-		}
+      $rating_db[$id] = array(
+  		  0 => 0,
+  		  1 => 0,
+  		  2 => 0,
+  		  3 => 0,
+  		  4 => 0
+		  );
+    }
+    // write database in json form to movie
+    fwrite($file, json_encode($rating_db));
+    // close the file
+    fclose($file);
 		return $rating_db;
 	}
 
 	// get the rating of a movie and return it
 	function get_rating ($id) {
-		$rating_db = json_decode(file_get_contents('movies_rating.txt'));
-		return $rating_db[$id - 1]->rating;
+    // get database from file
+    $rating_db = json_decode(file_get_contents('movies_rating.txt'));
+    // initialise empty temp variables
+    $rating = 0;
+    $people = 0;
+    for ($i = 1; $i < 6; $i++) {
+      // rating is a sum of all stars (1 * 3votes, 2 * 5votes, etc)
+      $rating += $rating_db[$id - 1][$i - 1] * $i;
+      $people += $rating_db[$id - 1][$i - 1];
+    }
+    if ($people)
+      $rating /= $people;
+    return $rating;
 	}
 ?>
