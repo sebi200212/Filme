@@ -1,7 +1,4 @@
 <?php require_once('header.php');
-	$movies_rating = json_decode(file_get_contents('movies_rating.txt'));
-
-
   $movieId = $_GET['movie_id'];
   if (isset($movieId) && $movieId && $movieId != "") {
     function get_movie($value) {
@@ -17,19 +14,12 @@
     <?php }
   }
 
+  // TODO: post-redirect-get method. explicatie la rush?
 	if (isset($_POST['star'])) {
-    $rating = $_POST['star'];
-
-    // if file is not empty
-    if (json_decode(file_get_contents('movies_rating.txt')) != null) {
-      file_put_contents('movies_rating.txt', json_encode(ratingSystem($movieId, $rating)));
-    } else {
-      file_put_contents('movies_rating.txt', json_encode(create_db($movies)));
-      file_put_contents('movies_rating.txt', json_encode(ratingSystem($movieId, $rating)));
-    }
+		$rating = $_POST['star'];
+		set_rating($movieId, $rating);
   }
-  unset($_POST); ?>
-
+  ?>
   <ul>
     <div class="movie">
 
@@ -58,7 +48,7 @@
           <?php } ?>
 
           <div class="rating">
-            <div class="rating-upper" style="width: <?php echo get_rating($movieId) * 20; ?>%">
+            <div class="rating-upper" style="width: <?php echo (get_rating($movieId) * 20); ?>%">
                 <span>★</span>
                 <span>★</span>
                 <span>★</span>
@@ -88,6 +78,7 @@
             ?>
             <br><br>
           </div>
+
           <div class = "actori">
             <ol>
               <?php
@@ -105,11 +96,12 @@
             </ol>
             <br>
           </div>
-          <div class="director">
-            <?php echo $movie->director."<br/><br/>"; ?>
-          </div>
-          <div class="">
 
+          <div class="director">
+            <?php echo $movie->director."<br><br>"; ?>
+          </div>
+
+          <div class="genres">
             <?php
             $genres_count = count($movie->genres);
             $genresIncrement = 0;
@@ -117,21 +109,17 @@
               echo $genre;
               if($genresIncrement < $genres_count - 1)
                 echo ', ';
-            $genresIncrement++;
+              $genresIncrement++;
             } ?>
-            <br>
-            <br>
+            <br><br>
           </div>
-
 
           <div class="time">
             <?php
               echo runtime_calculator($movie->runtime);?>
               <div class="runtime-bar">
-                  <div class="">
-                    <div class="" style="width: <?php echo $movie->runtime * 100 / $max_runtime; ?>%">
-
-                    </div>
+                  <div>
+                    <div style="width: <?php echo $movie->runtime * 100 / $max_runtime; ?>%"></div>
                   </div>
               </div>
           </div>
